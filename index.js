@@ -1,8 +1,17 @@
-const FRONTEND_URL = process.env.REACT_FRONTEND_URl;
+const express = require("express");
+const http = require("http");
+const app = express();
+const server = http.createServer(app);
+const port = 8900;
 
-const io = require("socket.io")(8900, {
+server.listen(port, () => console.log("server listening on " + port));
+
+const io = require("socket.io")(server, {
   cors: {
-    origin: "https://localhost:3000",
+    origin: [
+      "https://localhost:3000",
+      "https://dev.d30z43jak2q5yr.amplifyapp.com",
+    ],
   },
 });
 
